@@ -16,5 +16,12 @@ export class CustomerController {
         })
     }
 
-   
+    // Retrieve customers list
+    @Get('customers')
+    async getAllCustomer(@Res() res) {
+        const customers = await this.customerService.getAllCustomer();
+        return res.status(HttpStatus.OK).json(customers);
+    }
+
+    
 }
