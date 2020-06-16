@@ -42,4 +42,15 @@ export class CustomerController {
         });
     }
 
+    // Delete a customer
+    @Delete('/delete')
+    async deleteCustomer(@Res() res, @Query('customerID') customerID) {
+        const customer = await this.customerService.deleteCustomer(customerID);
+        if (!customer) throw new NotFoundException('Customer does not exist');
+        return res.status(HttpStatus.OK).json({
+            message: 'Customer has been deleted',
+            customer
+        })
+    }
+
 }
